@@ -6,4 +6,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EfCore.Data.PostgreSQL\EfCore.Data.PostgreSQL.csproj" />
+    <ProjectReference Include="..\EfCore.Data.SqlServer\EfCore.Data.SqlServer.csproj" />
+    <ProjectReference Include="..\EfCore.Domain\EfCore.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
