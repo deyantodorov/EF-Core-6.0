@@ -16,6 +16,7 @@ namespace EfCore.Console.ScaffoldDb.PostgreSQL
         {
         }
 
+        public virtual DbSet<Coach> Coaches { get; set; } = null!;
         public virtual DbSet<League> Leagues { get; set; } = null!;
         public virtual DbSet<Match> Matches { get; set; } = null!;
         public virtual DbSet<Team> Teams { get; set; } = null!;
@@ -31,6 +32,16 @@ namespace EfCore.Console.ScaffoldDb.PostgreSQL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Coach>(entity =>
+            {
+                entity.HasIndex(e => e.TeamId, "IX_Coaches_TeamId")
+                    .IsUnique();
+
+                entity.HasOne(d => d.Team)
+                    .WithOne(p => p.Coach)
+                    .HasForeignKey<Coach>(d => d.TeamId);
+            });
+
             modelBuilder.Entity<Match>(entity =>
             {
                 entity.HasIndex(e => e.AwayTeamId, "IX_Matches_AwayTeamId");

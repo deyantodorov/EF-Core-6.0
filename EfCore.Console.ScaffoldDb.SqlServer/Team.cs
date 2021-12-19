@@ -16,6 +16,7 @@ namespace EfCore.Console.ScaffoldDb.SqlServer
         public int LeagueId { get; set; }
 
         public virtual League League { get; set; } = null!;
+        public virtual Coach? Coach { get; set; }
         public virtual ICollection<Match> MatchAwayTeams { get; set; }
         public virtual ICollection<Match> MatchHomeTeams { get; set; }
     }

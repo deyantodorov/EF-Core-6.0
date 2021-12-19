@@ -16,6 +16,7 @@ namespace EfCore.Console.ScaffoldDb.SqlServer
         {
         }
 
+        public virtual DbSet<Coach> Coaches { get; set; } = null!;
         public virtual DbSet<League> Leagues { get; set; } = null!;
         public virtual DbSet<Match> Matches { get; set; } = null!;
         public virtual DbSet<Team> Teams { get; set; } = null!;
@@ -31,6 +32,17 @@ namespace EfCore.Console.ScaffoldDb.SqlServer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Coach>(entity =>
+            {
+                entity.HasIndex(e => e.TeamId, "IX_Coaches_TeamId")
+                    .IsUnique()
+                    .HasFilter("([TeamId] IS NOT NULL)");
+
+                entity.HasOne(d => d.Team)
+                    .WithOne(p => p.Coach)
+                    .HasForeignKey<Coach>(d => d.TeamId);
+            });
+
             modelBuilder.Entity<Match>(entity =>
             {
                 entity.HasIndex(e => e.AwayTeamId, "IX_Matches_AwayTeamId");
