@@ -17,6 +17,8 @@ namespace EfCore.Data.SqlServer
 
         public DbSet<Coach> Coaches { get; set; }
 
+        public DbSet<TeamsCoachesLeaguesView> TeamsCoachesLeagues {get;set;}
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=127.0.0.1,1433; Database=FootballLeague; User Id=sa; Password=P@ssword123;")
@@ -39,6 +41,8 @@ namespace EfCore.Data.SqlServer
                 .HasForeignKey(m => m.AwayTeamId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TeamsCoachesLeaguesView>().HasNoKey().ToView(nameof(TeamsCoachesLeaguesView));
         }
     }
 }

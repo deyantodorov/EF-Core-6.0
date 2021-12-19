@@ -39,6 +39,8 @@ namespace EfCore.Data.PostgreSQL
                 .HasForeignKey(m => m.AwayTeamId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TeamsCoachesLeaguesView>().HasNoKey().ToView(nameof(TeamsCoachesLeaguesView));
         }
     }
 }
