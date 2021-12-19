@@ -17,6 +17,7 @@ namespace EfCore.Console.ScaffoldDb.SqlServer
         }
 
         public virtual DbSet<League> Leagues { get; set; } = null!;
+        public virtual DbSet<Match> Matches { get; set; } = null!;
         public virtual DbSet<Team> Teams { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -30,6 +31,23 @@ namespace EfCore.Console.ScaffoldDb.SqlServer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Match>(entity =>
+            {
+                entity.HasIndex(e => e.AwayTeamId, "IX_Matches_AwayTeamId");
+
+                entity.HasIndex(e => e.HomeTeamId, "IX_Matches_HomeTeamId");
+
+                entity.HasOne(d => d.AwayTeam)
+                    .WithMany(p => p.MatchAwayTeams)
+                    .HasForeignKey(d => d.AwayTeamId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.HomeTeam)
+                    .WithMany(p => p.MatchHomeTeams)
+                    .HasForeignKey(d => d.HomeTeamId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
             modelBuilder.Entity<Team>(entity =>
             {
                 entity.HasIndex(e => e.LeagueId, "IX_Teams_LeagueId");
