@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 
-using EfCore.Domain.Common;
-
 namespace EfCore.Domain
 {
     public class League : BaseEntity

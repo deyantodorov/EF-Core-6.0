@@ -1,6 +1,4 @@
-﻿using EfCore.Domain.Common;
-
-namespace EfCore.Domain
+﻿namespace EfCore.Domain
 {
     public class Coach : BaseEntity
     {

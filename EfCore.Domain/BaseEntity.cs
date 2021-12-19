@@ -1,4 +1,4 @@
-﻿namespace EfCore.Domain.Common
+﻿namespace EfCore.Domain
 {
     public abstract class BaseEntity
     {

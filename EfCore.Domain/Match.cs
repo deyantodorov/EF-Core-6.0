@@ -1,7 +1,5 @@
 ﻿using System;
 
-using EfCore.Domain.Common;
-
 namespace EfCore.Domain
 {
     public class Match : BaseEntity
