@@ -15,6 +15,8 @@ namespace EfCore.Data.PostgreSQL
 
         public DbSet<Match> Matches { get; set; }
 
+        public DbSet<Coach> Coaches { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql("Username=postgres;Password=secretpassword;Host=127.0.0.1;Port=5432;Database=FootballLeague;Pooling=true;")

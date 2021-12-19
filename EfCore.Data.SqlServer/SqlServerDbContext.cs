@@ -15,6 +15,8 @@ namespace EfCore.Data.SqlServer
 
         public DbSet<Match> Matches { get; set; }
 
+        public DbSet<Coach> Coaches { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=127.0.0.1,1433; Database=FootballLeague; User Id=sa; Password=P@ssword123;")

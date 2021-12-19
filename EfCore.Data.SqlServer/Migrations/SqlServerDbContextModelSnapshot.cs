@@ -22,6 +22,30 @@ namespace EfCore.Data.SqlServer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("EfCore.Domain.Coach", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId")
+                        .IsUnique()
+                        .HasFilter("[TeamId] IS NOT NULL");
+
+                    b.ToTable("Coaches");
+                });
+
             modelBuilder.Entity("EfCore.Domain.League", b =>
                 {
                     b.Property<int>("Id")
@@ -87,6 +111,15 @@ namespace EfCore.Data.SqlServer.Migrations
                     b.ToTable("Teams");
                 });
 
+            modelBuilder.Entity("EfCore.Domain.Coach", b =>
+                {
+                    b.HasOne("EfCore.Domain.Team", "Team")
+                        .WithOne("Coach")
+                        .HasForeignKey("EfCore.Domain.Coach", "TeamId");
+
+                    b.Navigation("Team");
+                });
+
             modelBuilder.Entity("EfCore.Domain.Match", b =>
                 {
                     b.HasOne("EfCore.Domain.Team", "AwayTeam")
@@ -125,6 +158,9 @@ namespace EfCore.Data.SqlServer.Migrations
             modelBuilder.Entity("EfCore.Domain.Team", b =>
                 {
                     b.Navigation("AwayMatches");
+
+                    b.Navigation("Coach")
+                        .IsRequired();
 
                     b.Navigation("HomeMatches");
                 });
