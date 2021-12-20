@@ -40,9 +40,16 @@ namespace EfCore.Data.PostgreSQL
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Team>().Property(m => m.Name).HasMaxLength(80);
+            modelBuilder.Entity<Team>().HasIndex(m => m.Name).IsUnique();
+
+            modelBuilder.Entity<League>().Property(m => m.Name).HasMaxLength(80);
+            modelBuilder.Entity<League>().HasIndex(m => m.Name).IsUnique();
+
+            modelBuilder.Entity<Coach>().Property(m => m.Name).HasMaxLength(80);
+            modelBuilder.Entity<Coach>().HasIndex(m => new { m.Name, m.TeamId }).IsUnique();
+
             modelBuilder.Entity<TeamsCoachesLeaguesView>().HasNoKey().ToView(nameof(TeamsCoachesLeaguesView));
         }
-
-        
     }
 }

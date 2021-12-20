@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EfCore.Data.SqlServer.Configurations.Entities
 {
-    public class CoachSeedConfiguration : IEntityTypeConfiguration<Coach>
+    public class CoachConfiguration : IEntityTypeConfiguration<Coach>
     {
         public void Configure(EntityTypeBuilder<Coach> builder)
         {
@@ -28,6 +28,9 @@ namespace EfCore.Data.SqlServer.Configurations.Entities
                     Name = "Georgi Georgiev",
                     TeamId = 22
                 });
+
+            builder.Property(m => m.Name).HasMaxLength(80);
+            builder.HasIndex(m => new { m.Name, m.TeamId }).IsUnique();
         }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EfCore.Data.SqlServer.Configurations.Entities
 {
-    public class LeagueSeedConfiguration : IEntityTypeConfiguration<League>
+    public class LeagueConfiguration : IEntityTypeConfiguration<League>
     {
         public void Configure(EntityTypeBuilder<League> builder)
         {
@@ -25,6 +25,9 @@ namespace EfCore.Data.SqlServer.Configurations.Entities
                     Id = 22,
                     Name = "Georgi League"
                 });
+
+            builder.Property(m => m.Name).HasMaxLength(80);
+            builder.HasIndex(m => m.Name).IsUnique();
         }
     }
 }
