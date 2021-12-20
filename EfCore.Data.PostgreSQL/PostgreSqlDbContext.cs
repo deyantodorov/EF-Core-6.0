@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
+using System.Threading;
 
 using EfCore.Domain;
+using EfCore.Domain.Contracts;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -41,6 +44,24 @@ namespace EfCore.Data.PostgreSQL
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TeamsCoachesLeaguesView>().HasNoKey().ToView(nameof(TeamsCoachesLeaguesView));
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var entry in ChangeTracker.Entries<IAuditable>())
+            {
+                entry.Entity.Updated = DateTime.UtcNow;
+
+                if (entry.State != EntityState.Added)
+                {
+                    continue;
+                }
+
+                entry.Entity.Created = DateTime.UtcNow;
+                entry.Entity.Uuid = Guid.NewGuid();
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }

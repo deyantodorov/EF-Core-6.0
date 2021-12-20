@@ -4,6 +4,7 @@ using EfCore.Data.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfCore.Data.SqlServer.Migrations
 {
     [DbContext(typeof(SqlServerDbContext))]
-    partial class SqlServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211220075031_AddDefaultTeamsAndCoaches")]
+    partial class AddDefaultTeamsAndCoaches
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,27 +32,12 @@ namespace EfCore.Data.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TeamId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("Updated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("Uuid")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -64,26 +51,20 @@ namespace EfCore.Data.SqlServer.Migrations
                         new
                         {
                             Id = 20,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Ivan Ivanov",
-                            TeamId = 20,
-                            Uuid = new Guid("00000000-0000-0000-0000-000000000000")
+                            TeamId = 20
                         },
                         new
                         {
                             Id = 21,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Petar Petrov",
-                            TeamId = 21,
-                            Uuid = new Guid("00000000-0000-0000-0000-000000000000")
+                            TeamId = 21
                         },
                         new
                         {
                             Id = 22,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Georgi Georgiev",
-                            TeamId = 22,
-                            Uuid = new Guid("00000000-0000-0000-0000-000000000000")
+                            TeamId = 22
                         });
                 });
 
@@ -95,24 +76,9 @@ namespace EfCore.Data.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Updated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("Uuid")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -122,23 +88,17 @@ namespace EfCore.Data.SqlServer.Migrations
                         new
                         {
                             Id = 20,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Ivan League",
-                            Uuid = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "Ivan League"
                         },
                         new
                         {
                             Id = 21,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Petar League",
-                            Uuid = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "Petar League"
                         },
                         new
                         {
                             Id = 22,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Georgi League",
-                            Uuid = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "Georgi League"
                         });
                 });
 
@@ -153,26 +113,11 @@ namespace EfCore.Data.SqlServer.Migrations
                     b.Property<int>("AwayTeamId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("HomeTeamId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("Updated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("Uuid")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -191,27 +136,12 @@ namespace EfCore.Data.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("LeagueId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Updated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("Uuid")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -223,26 +153,20 @@ namespace EfCore.Data.SqlServer.Migrations
                         new
                         {
                             Id = 20,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LeagueId = 20,
-                            Name = "Ivan Team",
-                            Uuid = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "Ivan Team"
                         },
                         new
                         {
                             Id = 21,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LeagueId = 21,
-                            Name = "Petar Team",
-                            Uuid = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "Petar Team"
                         },
                         new
                         {
                             Id = 22,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LeagueId = 22,
-                            Name = "Georgi Team",
-                            Uuid = new Guid("00000000-0000-0000-0000-000000000000")
+                            Name = "Georgi Team"
                         });
                 });
 

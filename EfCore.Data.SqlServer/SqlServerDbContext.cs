@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
+using EfCore.Data.SqlServer.Configurations.Entities;
 using EfCore.Domain;
+using EfCore.Domain.Contracts;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -17,7 +21,7 @@ namespace EfCore.Data.SqlServer
 
         public DbSet<Coach> Coaches { get; set; }
 
-        public DbSet<TeamsCoachesLeaguesView> TeamsCoachesLeagues {get;set;}
+        public DbSet<TeamsCoachesLeaguesView> TeamsCoachesLeagues { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -43,6 +47,28 @@ namespace EfCore.Data.SqlServer
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TeamsCoachesLeaguesView>().HasNoKey().ToView(nameof(TeamsCoachesLeaguesView));
+
+            modelBuilder.ApplyConfiguration(new LeagueSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new TeamSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new CoachSeedConfiguration());
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var entry in ChangeTracker.Entries<IAuditable>())
+            {
+                entry.Entity.Updated = DateTime.UtcNow;
+
+                if (entry.State != EntityState.Added)
+                {
+                    continue;
+                }
+
+                entry.Entity.Created = DateTime.UtcNow;
+                entry.Entity.Uuid = Guid.NewGuid();
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }

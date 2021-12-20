@@ -4,6 +4,7 @@ using EfCore.Data.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfCore.Data.SqlServer.Migrations
 {
     [DbContext(typeof(SqlServerDbContext))]
-    partial class SqlServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211220095052_AddAuditInfo")]
+    partial class AddAuditInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +45,7 @@ namespace EfCore.Data.SqlServer.Migrations
                     b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Updated")
+                    b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
@@ -67,6 +69,7 @@ namespace EfCore.Data.SqlServer.Migrations
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Ivan Ivanov",
                             TeamId = 20,
+                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Uuid = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
@@ -75,6 +78,7 @@ namespace EfCore.Data.SqlServer.Migrations
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Petar Petrov",
                             TeamId = 21,
+                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Uuid = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
@@ -83,6 +87,7 @@ namespace EfCore.Data.SqlServer.Migrations
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Georgi Georgiev",
                             TeamId = 22,
+                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Uuid = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
@@ -105,7 +110,7 @@ namespace EfCore.Data.SqlServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Updated")
+                    b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
@@ -124,6 +129,7 @@ namespace EfCore.Data.SqlServer.Migrations
                             Id = 20,
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Ivan League",
+                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Uuid = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
@@ -131,6 +137,7 @@ namespace EfCore.Data.SqlServer.Migrations
                             Id = 21,
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Petar League",
+                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Uuid = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
@@ -138,6 +145,7 @@ namespace EfCore.Data.SqlServer.Migrations
                             Id = 22,
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Georgi League",
+                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Uuid = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
@@ -165,7 +173,7 @@ namespace EfCore.Data.SqlServer.Migrations
                     b.Property<int>("HomeTeamId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Updated")
+                    b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
@@ -204,7 +212,7 @@ namespace EfCore.Data.SqlServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Updated")
+                    b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
@@ -226,6 +234,7 @@ namespace EfCore.Data.SqlServer.Migrations
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LeagueId = 20,
                             Name = "Ivan Team",
+                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Uuid = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
@@ -234,6 +243,7 @@ namespace EfCore.Data.SqlServer.Migrations
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LeagueId = 21,
                             Name = "Petar Team",
+                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Uuid = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
@@ -242,6 +252,7 @@ namespace EfCore.Data.SqlServer.Migrations
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LeagueId = 22,
                             Name = "Georgi Team",
+                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Uuid = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
