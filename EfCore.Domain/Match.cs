@@ -2,7 +2,7 @@
 
 namespace EfCore.Domain
 {
-    public class Match : BaseEntity
+    public class Match : BaseEntity<int>
     {
         public int HomeTeamId { get; set; }
 

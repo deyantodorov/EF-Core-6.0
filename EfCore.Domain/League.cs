@@ -2,7 +2,7 @@
 
 namespace EfCore.Domain
 {
-    public class League : BaseEntity
+    public class League : BaseEntity<int>
     {
         public string Name { get; set; }
 

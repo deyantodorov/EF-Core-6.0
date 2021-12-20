@@ -1,6 +1,6 @@
 ﻿namespace EfCore.Domain
 {
-    public class Coach : BaseEntity
+    public class Coach : BaseEntity<int>
     {
         public string Name { get; set; }
 
