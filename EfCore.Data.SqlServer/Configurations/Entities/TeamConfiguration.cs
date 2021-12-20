@@ -9,6 +9,23 @@ namespace EfCore.Data.SqlServer.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<Team> builder)
         {
+            builder
+                .HasMany(m => m.HomeMatches)
+                .WithOne(m => m.HomeTeam)
+                .HasForeignKey(m => m.HomeTeamId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasMany(m => m.AwayMatches)
+                .WithOne(m => m.AwayTeam)
+                .HasForeignKey(m => m.AwayTeamId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(m => m.Name).HasMaxLength(80);
+            builder.HasIndex(m => m.Name).IsUnique();
+
             builder.HasData(
                 new Team
                 {
@@ -28,23 +45,6 @@ namespace EfCore.Data.SqlServer.Configurations.Entities
                     Name = "Georgi Team",
                     LeagueId = 22
                 });
-
-            builder
-                .HasMany(m => m.HomeMatches)
-                .WithOne(m => m.HomeTeam)
-                .HasForeignKey(m => m.HomeTeamId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .HasMany(m => m.AwayMatches)
-                .WithOne(m => m.AwayTeam)
-                .HasForeignKey(m => m.AwayTeamId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Property(m => m.Name).HasMaxLength(80);
-            builder.HasIndex(m => m.Name).IsUnique();
         }
     }
 }

@@ -9,6 +9,9 @@ namespace EfCore.Data.SqlServer.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<Coach> builder)
         {
+            builder.Property(m => m.Name).HasMaxLength(80);
+            builder.HasIndex(m => new { m.Name, m.TeamId }).IsUnique();
+
             builder.HasData(
                 new Coach
                 {
@@ -28,9 +31,6 @@ namespace EfCore.Data.SqlServer.Configurations.Entities
                     Name = "Georgi Georgiev",
                     TeamId = 22
                 });
-
-            builder.Property(m => m.Name).HasMaxLength(80);
-            builder.HasIndex(m => new { m.Name, m.TeamId }).IsUnique();
         }
     }
 }

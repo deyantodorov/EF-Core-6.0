@@ -9,6 +9,9 @@ namespace EfCore.Data.SqlServer.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<League> builder)
         {
+            builder.Property(m => m.Name).HasMaxLength(80);
+            builder.HasIndex(m => m.Name).IsUnique();
+
             builder.HasData(
                 new League
                 {
@@ -25,9 +28,6 @@ namespace EfCore.Data.SqlServer.Configurations.Entities
                     Id = 22,
                     Name = "Georgi League"
                 });
-
-            builder.Property(m => m.Name).HasMaxLength(80);
-            builder.HasIndex(m => m.Name).IsUnique();
         }
     }
 }
