@@ -22,17 +22,13 @@ var leagueC = new League
     Name = "League C"
 };
 
-if (postgreSqlDbContext.Leagues.Any() == false)
-{
-    await postgreSqlDbContext.Leagues.AddAsync(leagueA);
-    await postgreSqlDbContext.Leagues.AddAsync(leagueB);
-    await postgreSqlDbContext.SaveChangesAsync();
-}
 
-if (sqlServerDbContext.Leagues.Any() == false)
-{
-    await sqlServerDbContext.Leagues.AddAsync(leagueA);
-    await sqlServerDbContext.Leagues.AddAsync(leagueB);
-    await sqlServerDbContext.Leagues.AddAsync(leagueC);
-    await sqlServerDbContext.SaveChangesAsync();
-}
+await postgreSqlDbContext.Leagues.AddAsync(leagueA);
+await postgreSqlDbContext.Leagues.AddAsync(leagueB);
+await postgreSqlDbContext.SaveChangesAsync("Petar Petrov");
+
+
+await sqlServerDbContext.Leagues.AddAsync(leagueA);
+await sqlServerDbContext.Leagues.AddAsync(leagueB);
+await sqlServerDbContext.Leagues.AddAsync(leagueC);
+await sqlServerDbContext.SaveChangesAsync("Ivan Ivanov");

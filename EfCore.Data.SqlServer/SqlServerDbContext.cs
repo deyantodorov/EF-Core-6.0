@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace EfCore.Data.SqlServer
 {
-    public class SqlServerDbContext : DbContext
+    public class SqlServerDbContext : AuditableSqlServerDbContex
     {
         public DbSet<Team> Teams { get; set; }
 
@@ -53,22 +53,6 @@ namespace EfCore.Data.SqlServer
             modelBuilder.ApplyConfiguration(new CoachSeedConfiguration());
         }
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            foreach (var entry in ChangeTracker.Entries<IAuditable>())
-            {
-                entry.Entity.Updated = DateTime.UtcNow;
-
-                if (entry.State != EntityState.Added)
-                {
-                    continue;
-                }
-
-                entry.Entity.Created = DateTime.UtcNow;
-                entry.Entity.Uuid = Guid.NewGuid();
-            }
-
-            return await base.SaveChangesAsync(cancellationToken);
-        }
+        
     }
 }
