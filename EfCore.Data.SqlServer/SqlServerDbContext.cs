@@ -53,7 +53,7 @@ namespace EfCore.Data.SqlServer
             modelBuilder.ApplyConfiguration(new CoachSeedConfiguration());
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<IAuditable>())
             {
@@ -68,7 +68,7 @@ namespace EfCore.Data.SqlServer
                 entry.Entity.Uuid = Guid.NewGuid();
             }
 
-            return base.SaveChangesAsync(cancellationToken);
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }

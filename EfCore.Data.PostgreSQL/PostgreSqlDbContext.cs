@@ -46,7 +46,7 @@ namespace EfCore.Data.PostgreSQL
             modelBuilder.Entity<TeamsCoachesLeaguesView>().HasNoKey().ToView(nameof(TeamsCoachesLeaguesView));
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<IAuditable>())
             {
@@ -61,7 +61,7 @@ namespace EfCore.Data.PostgreSQL
                 entry.Entity.Uuid = Guid.NewGuid();
             }
 
-            return base.SaveChangesAsync(cancellationToken);
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }
